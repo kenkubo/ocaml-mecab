@@ -1,0 +1,34 @@
+.PHONY: lib lib-clean lib-distclean lib-install lib-uninstall
+
+CFLAGS += -g -DHAVE_CONFIG_H $(shell mecab-config --cflags) -I $(shell ocamlc -where)
+
+STUBS[] = 
+	mecab_stubs
+
+mecab_stubs: $(StaticCLibrary mecab_stubs, $(STUBS))
+
+
+FILES[] =
+	mecab
+
+
+OCAML_CLIBS += mecab_stubs 
+OCAMLFLAGS += -g
+OCAML_LINK_FLAGS += -cclib -lmecab -cclib -lstdc++
+
+INSTALL_FILES = META mecab.cma mecab.cmxa mecab.cmi
+
+lib: $(OCamlLibrary mecab, $(FILES))
+
+lib-clean:
+	rm -f *.cmi *.cmo *.cmx *.cma *.cmxa *.cmxs *.a *.o *.opt mecab
+
+lib-distclean: lib-clean
+	rm -f *.omc
+
+lib-install: $(INSTALL_FILES)
+	ocamlfind install mecab $(INSTALL_FILES)
+
+lib-uninstall:
+	ocamlfind remove mecab
+

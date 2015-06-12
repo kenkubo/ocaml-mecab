@@ -1,0 +1,17 @@
+.PHONY: test-prog run-test test-clean test-distclean
+
+OCAMLINCLUDES += ../src
+OCAML_LIBS += ../src/mecab
+OCAML_CLIBS += ../src/mecab_stubs
+OCAML_LINK_FLAGS += -cclib -lmecab -cclib -lstdc++
+
+test-prog: $(OCamlProgram test, test)
+
+run-test: test-prog
+	./test
+
+test-clean:
+	rm -f *.cmi *.cmo *.cmx *.cma *.cmxa *.cmxs *.a *.o *.opt *.run test
+
+test-distclean: test-clean
+	rm -f *.omc

@@ -1,0 +1,7 @@
+name="mecab"
+description="OCaml bindings for MeCab"
+version="0.1"
+depends=""
+archive(byte)="mecab.cma"
+archive(native)="mecab.cmxa" 
+

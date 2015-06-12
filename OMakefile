@@ -1,0 +1,25 @@
+NATIVE_ENABLED = true
+BYTE_ENABLED   = true
+
+USE_OCAMLFIND = true
+OCAMLPACKS[] = extlib
+
+
+.PHONY: clean distclean install uninstall test
+
+.SUBDIRS: src tests
+
+
+
+.DEFAULT: lib
+
+clean: lib-clean test-clean 
+
+distclean: lib-distclean test-distclean
+	rm -f *.omc
+
+install: lib-install
+
+uninstall: lib-uninstall
+
+test: run-test
